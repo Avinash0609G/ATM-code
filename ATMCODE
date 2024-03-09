@@ -1,0 +1,115 @@
+def ATM(chances):
+    #chances = 4
+    chances = chances - 1
+    username = ["A","B","C","D"]
+    password = ["A123","B123","C123","D123"]
+    pin = [1111,2222,3333,4444]
+    balance = [534500,334697,254523,466978]
+
+    def withdraw():
+        print("Enter amount to Withdraw:")
+        withdrawamo = int(input())
+        print("Enter pin")
+        pinn = int(input())
+
+        if(pinn != pin[ind]):
+            print("Enter Correct Pin")
+
+        elif(withdrawamo > balance[ind]):
+            print("Insufficient Funds in your account")
+            print("End")
+        elif(pinn == pin[ind]):
+            print("Collect your Cash {}".format(withdrawamo))
+            print("Your Available Balance is {}".format(balance[ind] - withdrawamo))
+            balance[ind] = balance[ind] - withdrawamo
+
+    def deposit():
+        print("Enter the Amount to deposit")
+        depositamo = int(input())
+        print("Enter your pin")
+        pinn = int(input())
+        if(pinn == pin[ind]):
+            print("Amount deposited Successfully")
+            print("Your account Balance is {}".format(depositamo + balance[ind]))
+            balance[ind] = depositamo + balance[ind]
+            print(balance)
+
+    def CheckBalance():
+        print("Enter your pin:")
+        pinn = int(input())
+        if(pinn == pin[ind]):
+            print("Your Account Balance is {}".format(balance[ind]))
+        elif(pinn != pin[ind]):
+            print("Incorrect pin ")
+            print("End")
+            return
+
+    def ChangePassword():
+        print("Enter your pin:")
+        pinn = int(input())
+        if (pinn == pin[ind]):
+            print("Enter your current password:")
+            cpw = input()
+            if(cpw == password[ind]):
+                print("Enter your new Password:")
+                npw = input()
+                print("Renter your new Password:")
+                rnpw = input()
+                if(npw == rnpw):
+                    print("Password Changed Successfully")
+                    password[ind] = rnpw
+                    #print(password)
+                elif(npw != rnpw):
+                    print("Your passwords are not matching:")
+                    ChangePassword()
+
+
+
+    try:
+
+        print("Enter UserName:")
+        un = input()
+        ind = username.index(un)
+        #print(ind)
+        if(un in username):
+            print("Enter Password:")
+
+        elif(un not in username):
+            print("Invalid Username")
+            print("End")
+        pw = input()
+        if(pw == password[ind] ):
+            print("Enter your Choice:")
+            print("1.withdraw")
+            print("2.deposit")
+            print("3.Check Balance")
+            print("4.Change Password")
+            print("----------------------------------------------------------")
+            print("Enter your Choice:")
+
+            choice = int(input())
+            if(choice == 1):
+                withdraw()
+            elif(choice == 2):
+                deposit()
+            elif(choice == 3):
+                CheckBalance()
+            elif(choice == 4):
+                ChangePassword()
+            else:
+                print("Enter Proper Value")
+
+
+        elif(pw != password[ind]):
+            print("Invalid Password")
+            #chances = chances - 1
+            print("you have more {} chances left".format(chances))
+
+            if(chances > 0):
+                ATM(chances)
+
+    except:
+        print("check error")
+
+
+ATM(chances = 3)
